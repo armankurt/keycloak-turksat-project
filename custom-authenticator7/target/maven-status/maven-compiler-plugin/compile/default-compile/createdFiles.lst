@@ -1,0 +1,6 @@
+org/keycloak/broker/turksat/TurksatIdentityProvider.class
+com/example/keycloak/authenticator/EsignIdentityProviderFactory.class
+com/example/keycloak/authenticator/EsignIdentityProviderAuthenticator.class
+com/example/keycloak/authenticator/EsignIdentityProviderConfig.class
+org/keycloak/broker/turksat/TurksatIdentityProviderFactory.class
+com/example/keycloak/authenticator/EsignIdentityProvider.class
