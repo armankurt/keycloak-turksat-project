@@ -1,6 +1,0 @@
-/Users/armanyilmazkurt/Desktop/keycloak/keycloak-2fa-sms-authenticator-main/src/main/java/dasniko/keycloak/authenticator/SmsAuthenticator.java
-/Users/armanyilmazkurt/Desktop/keycloak/keycloak-2fa-sms-authenticator-main/src/main/java/dasniko/keycloak/authenticator/gateway/SmsServiceFactory.java
-/Users/armanyilmazkurt/Desktop/keycloak/keycloak-2fa-sms-authenticator-main/src/main/java/dasniko/keycloak/authenticator/gateway/SmsService.java
-/Users/armanyilmazkurt/Desktop/keycloak/keycloak-2fa-sms-authenticator-main/src/main/java/dasniko/keycloak/authenticator/SmsAuthenticatorFactory.java
-/Users/armanyilmazkurt/Desktop/keycloak/keycloak-2fa-sms-authenticator-main/src/main/java/dasniko/keycloak/authenticator/SmsConstants.java
-/Users/armanyilmazkurt/Desktop/keycloak/keycloak-2fa-sms-authenticator-main/src/main/java/dasniko/keycloak/authenticator/gateway/AwsSmsService.java

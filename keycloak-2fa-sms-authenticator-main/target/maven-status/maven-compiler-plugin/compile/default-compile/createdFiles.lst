@@ -1,6 +1,0 @@
-dasniko/keycloak/authenticator/SmsAuthenticator.class
-dasniko/keycloak/authenticator/gateway/AwsSmsService.class
-dasniko/keycloak/authenticator/gateway/SmsServiceFactory.class
-dasniko/keycloak/authenticator/SmsConstants.class
-dasniko/keycloak/authenticator/gateway/SmsService.class
-dasniko/keycloak/authenticator/SmsAuthenticatorFactory.class
