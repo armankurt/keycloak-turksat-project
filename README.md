@@ -1,6 +1,12 @@
 # Keycloak Kurulumu ve Özelleştirme Talimatları
 
-Bu belge, Docker ortamında Keycloak konteynırının kurulumu ve özelleştirilmesi için gerekli adımları içermektedir. Ayrıca, özelleştirilmiş jar dosyalarının nasıl yükleneceği ve işleneceği detaylı bir şekilde açıklanmaktadır.
+Keycloak, modern kimlik doğrulama ve yetkilendirme işlemleri için kullanılan, açık kaynaklı bir kimlik sağlayıcıdır. Bu belge, Docker ortamında Keycloak konteynırının kurulumu ve özelleştirilmesi için gereken tüm adımları detaylı bir şekilde açıklamaktadır. Ayrıca, özelleştirilmiş doğrulayıcıların (authenticator) oluşturulması, bu doğrulayıcıların Keycloak üzerine yüklenmesi ve doğru bir şekilde yapılandırılması konularında rehberlik etmektedir.
+
+Bu belge, özellikle kullanıcıların kimlik doğrulama sürecini kişiselleştirmek ve sistem gereksinimlerine uygun hale getirmek isteyen yazılım geliştiriciler için hazırlanmıştır. Örneğin, bir projede kullanıcıların TC Kimlik Numarası ile giriş yapabilmesi, e-posta veya SMS yoluyla iki faktörlü doğrulama gerçekleştirebilmesi ya da mobil imza ve e-imza gibi ileri düzey güvenlik yöntemlerini kullanabilmesi gerekebilir. Burada ele alınan yöntemler, bu gibi ihtiyaçlara yanıt verecek şekilde tasarlanmıştır.
+
+Belgede ayrıca Keycloak temasının özelleştirilmesine ilişkin bilgiler de bulunmaktadır. Özel bir giriş sayfası tasarlamak, şirket markasına uygun bir görünüm ve his yaratmak isteyen projeler için özel tema oluşturma ve düzenleme adımları detaylandırılmıştır. Keycloak’ı kullanarak kimlik doğrulama süreçlerinizi hem güvenli hem de kullanıcı dostu bir hale getirmek için ihtiyacınız olan tüm teknik bilgiler bu belgede yer almaktadır.
+
+Bu proje, kurumsal düzeyde bir uygulamanın kimlik doğrulama altyapısını oluşturmayı hedeflemektedir. Kullanıcıların farklı yöntemlerle sisteme güvenli bir şekilde erişmesini sağlamak için birden fazla özelleştirilmiş doğrulama seçeneği sunulmuştur. Ayrıca, giriş süreçlerinin görsel ve işlevsel olarak kuruma özel bir şekilde özelleştirilmesi amaçlanmaktadır. Bu belgede yer alan rehber, projeyi başarılı bir şekilde hayata geçirmek isteyen geliştiriciler için adım adım yol gösterici bir kaynak niteliğindedir.
 
 ---
 
