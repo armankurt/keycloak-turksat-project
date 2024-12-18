@@ -22,11 +22,11 @@ Bu işlem tamamlandığında Keycloak arayüzüne tarayıcınız üzerinden [htt
 
 ---
 
-## Keycloak Özelleştirilmiş Doğrulayıcıların Yüklenmesi ve Admin Konsoluna Eklenmesi
+## 1. Keycloak Özelleştirilmiş Doğrulayıcıların Yüklenmesi ve Admin Konsoluna Eklenmesi
 
 Bu bölümde Maven kullanarak özelleştirilmiş doğrulayıcıların (authenticator) nasıl oluşturulacağı, Docker üzerinden Keycloak konteynırına nasıl yükleneceği ve bu doğrulayıcıların Keycloak Admin Konsolu üzerinden nasıl yapılandırılacağı anlatılmaktadır.
 
-### 1. Maven ile Özelleştirilmiş Doğrulayıcıların Oluşturulması
+### Maven ile Özelleştirilmiş Doğrulayıcıların Oluşturulması
 Her bir doğrulayıcı için aşağıdaki adımları takip ederek Maven ile jar dosyasını oluşturun ve Keycloak konteynırına yükleyin.
 
 #### 1.1 Doğrulayıcı: TcKimlikGiris
@@ -177,7 +177,7 @@ Bu rehber, Keycloak üzerinde özel bir tema oluşturmak, dosya yapısını düz
 
 ---
 
-## 1. Keycloak Konteynırına Erişim
+## 2. Keycloak Konteynırına Erişim
 
 Keycloak konteynırının içine erişim sağlamak için aşağıdaki komutu kullanın:
 
@@ -189,7 +189,7 @@ Bu komut, Keycloak konteynırının terminaline bağlanmanızı sağlar. Buradan
 
 ---
 
-## 2. Özel Tema Klasörünün Oluşturulması
+## 3. Özel Tema Klasörünün Oluşturulması
 
 Keycloak temaları, `/opt/keycloak/themes/` dizini altında yer alır. Buraya yeni bir tema klasörü oluşturmanız gerekmektedir.
 
@@ -230,7 +230,7 @@ Oluşturduğunuz klasör yapısı şu şekilde görünmelidir:
 
 ---
 
-## 3. FTL ve Kaynak Dosyalarının Yüklenmesi
+## 4. FTL ve Kaynak Dosyalarının Yüklenmesi
 
 Özelleştirilmiş tema dosyalarınızı (FTL, CSS, resimler vb.) ilgili klasörlere yüklemeniz gerekmektedir. Bunun için konteynır dışında hazırladığınız dosyaları aşağıdaki komutlarla kopyalayabilirsiniz:
 
@@ -265,7 +265,7 @@ docker cp /Users/armanyilmazkurt/Desktop/keycloak_Resimleri/wait.png /opt/keyclo
 
 ---
 
-## 4. Temayı Aktif Hale Getirme
+## 5. Temayı Aktif Hale Getirme
 
 Özel temayı aktif hale getirmek için Keycloak Admin Konsolu kullanılır.
 
@@ -285,7 +285,7 @@ docker cp /Users/armanyilmazkurt/Desktop/keycloak_Resimleri/wait.png /opt/keyclo
 
 ---
 
-## 5. Keycloak Konteynırını Yeniden Başlatma
+## 6. Keycloak Konteynırını Yeniden Başlatma
 
 Tema yüklemelerini tamamladıktan sonra Keycloak konteynırını yeniden başlatmanız gerekmektedir:
 
@@ -304,6 +304,164 @@ Konteynırın loglarını izlemek ve olası hataları tespit etmek için şu kom
 ```bash
 docker logs -f keycloak
 ```
+---
+## 7. Keycloak E-İmza ve Mobil İmza Simülasyonu Çalıştırma Talimatları
+
+Bu bölüm, e-İmza ve mobil imza simülasyonlarının nasıl çalıştırılacağını detaylı bir şekilde açıklamaktadır. Aşağıdaki adımları takip ederek her iki simülasyonu test edebilir ve doğrulama süreçlerini uygulayabilirsiniz.
+
+---
+
+## 7.1 E-İmza Simülasyonu
+
+### 1. Gereksinimler
+
+- **esign-similasyon.html** dosyasını bir tarayıcıda çalıştırarak kullanıcı arayüzüne erişin.
+- **EsignApi** içeren API servisini çalıştırmak için gerekli olan altyapıyı hazırlayın.
+
+### 2. API Sunucusunu Başlatma
+
+- API projesini çalıştırarak işlem kodlarının saklanmasını ve doğrulamasını sağlayın.
+- **Program.cs** dosyasında portun **7248** olduğundan emin olun ve sunucuyu başlatın.
+
+### 3. Kullanıcı Arayüzü İşlemleri
+
+- **transactionCode** alanına Keycloak tarafından sağlanan işlem kodunu girin.
+- **cardType** seçimini yapın (Net iD, Siemens CardOS gibi).
+- "Doğrulamayı Kontrol Et" veya "Doğrulama Yap" butonlarını kullanarak işlem kodunun durumunu sorgulayın ve doğrulayın.
+
+### 4. Yanıtlar
+
+- **Kod doğrulandı! Giriş başarılı.**: İşlem kodu başarıyla doğrulandı.
+- **Kod doğrulama bekleniyor.**: İşlem kodu doğrulama için bekleniyor.
+- **Geçersiz kod!**: Hatalı işlem kodu girdiniz.
+
+---
+
+## 7.2 Mobil İmza Simülasyonu
+
+### 1. Gereksinimler
+
+- Python ile yazılmış **MobileSignApi.py** dosyasını kullanarak mobil imza doğrulama servisini başlatın.
+- Mobil imza API’sinin çalıştığı port (**8081**) ve endpoint adreslerini not edin.
+
+### 2. Mobil İmza Servisini Çalıştırma
+
+**MobileSignApi.py** dosyasını çalıştırmak için:
+
+```bash
+python MobileSignApi.py
+```
+
+Sunucunun çalıştığından emin olmak için tarayıcınız veya Postman ile aşağıdaki endpoint'leri test edin.
+
+### 3. API Endpoint'lerinin Kullanımı
+
+#### Kullanıcı Onay Durumunu Sorgulama
+
+- **Endpoint**: `/mobil-sign/approval`
+- **Yöntem**: `GET`
+- **Açıklama**: Kullanıcının onay durumunu kontrol eder.
+
+**Yanıtlar**:
+
+- `"status": "approved"`: Kullanıcı onaylanmış.
+- `"status": "pending"`: Kullanıcı onay bekliyor.
+
+**curl ile örnek:**
+
+```bash
+curl -X GET http://127.0.0.1:8081/mobil-sign/approval
+```
+
+#### Kullanıcıyı Onaylama
+
+- **Endpoint**: `/mobil-sign/approve`
+- **Yöntem**: `POST`
+- **Açıklama**: Kullanıcıyı onaylamak için kullanılır.
+
+**Gerekli JSON Body**:
+
+```json
+{
+  "password": "1234"
+}
+```
+
+**Yanıtlar**:
+
+- `"message": "User approved"`: Kullanıcı başarıyla onaylandı.
+- `"message": "Invalid password"`: Geçersiz şifre.
+
+**curl ile örnek:**
+
+```bash
+curl -X POST http://127.0.0.1:8081/mobil-sign/approve \
+-H "Content-Type: application/json" \
+-d '{"password": "1234"}'
+```
+
+### 4. Kullanıcı İşlemleri
+
+- Kullanıcı, "Mobil İmza Onay Bekleniyor" mesajını alana kadar `/mobil-sign/approval` endpoint’ini kullanarak durumu kontrol eder.
+- Kullanıcı **password** alanını kullanarak `/mobil-sign/approve` endpoint’inden başarıyla onaylanır.
+
+---
+
+## 8. LDAP Entegrasyonu
+
+LDAP (Lightweight Directory Access Protocol), kullanıcı kimlik bilgilerini merkezi bir dizin hizmetinde saklamak ve yönetmek için kullanılan bir protokoldür. Keycloak ile LDAP entegrasyonu sayesinde kullanıcılar, merkezi bir dizin üzerinde tanımlanan kimlik bilgileriyle giriş yapabilir. Bu entegrasyon hem kullanıcı yönetimini kolaylaştırır hem de güvenliği artırır.
+
+### 1. LDAP Sunucusunun Ayarlanması
+
+#### 1.1 Docker ile LDAP Sunucusunu Çalıştırma
+
+- Yüklediğiniz **docker-compose.yml** dosyasına göre aşağıdaki adımları izleyerek bir LDAP sunucusu çalıştırabilirsiniz.
+
+1. Docker Compose dosyasını bir dizine kaydedin.
+2. Komut satırında aşağıdaki komutu çalıştırarak LDAP sunucusunu başlatın:
+
+```bash
+docker-compose up -d
+```
+
+- LDAP sunucusu, varsayılan olarak **389** portunda çalışacak.
+- Sunucunun erişilebilir olduğundan emin olun.
+
+#### 1.2 LDIF Dosyaları ile Verilerin Eklenmesi
+
+**add\_ou.ldif** ve **users.ldif** dosyalarını kullanarak organizasyon birimlerini (OU) ve kullanıcıları LDAP dizinine ekleyebilirsiniz.
+
+**ldapadd** komutuyla bu dosyaları eklemek için:
+
+```bash
+ldapadd -x -D "cn=admin,dc=example,dc=org" -w admin123 -f add_ou.ldif
+ldapadd -x -D "cn=admin,dc=example,dc=org" -w admin123 -f users.ldif
+```
+
+---
+
+### 2. Keycloak ile LDAP Entegrasyonu
+
+#### 2.1 Keycloak LDAP Federasyonu Oluşturma
+
+1. Keycloak Admin Konsoluna giriş yapın.
+2. **Realm Settings** > **User Federation** sekmesine gidin.
+3. **Add provider** seçeneğinden LDAP'ı seçin.
+
+#### 2.2 LDAP Ayarları
+
+- **Edit Mode**: `READ_ONLY` veya `WRITABLE` seçin (LDAP dizinindeki kullanıcıların Keycloak üzerinden düzenlenip düzenlenemeyeceğini belirler).
+- **Vendor**: Kullanılan LDAP sunucusuna uygun seçimi yapın (Active Directory, OpenLDAP vb.).
+- **Connection URL**: `ldap://localhost:389`
+- **Bind DN**: `cn=admin,dc=example,dc=org`
+- **Bind Credential**: LDAP admin şifresi (admin123 gibi).
+- **User DN**: Kullanıcıların bulunduğu DN (`ou=users,dc=example,dc=org` gibi).
+
+#### 2.3 LDAP Kullanıcılarının Keycloak'a Eşlenmesi
+
+1. **Sync Settings** bölümünden LDAP kullanıcılarını Keycloak'a senkronize edin.
+2. **Mapper** sekmesine giderek LDAP kullanıcı niteliklerini Keycloak niteliklerine eşleştirin (LDAP **cn**'ini Keycloak **username**'ine eşleme gibi).
+
 
 ---
 
