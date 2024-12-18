@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "Nl/zkepOEJnBBjfHmBdfr4dIylsUIpWyUtLozf2Lg6U=",
+  "Source": "TransactionCodeApi",
+  "BasePath": "_content/TransactionCodeApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

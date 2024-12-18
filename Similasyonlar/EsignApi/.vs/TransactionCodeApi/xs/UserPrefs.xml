@@ -1,0 +1,31 @@
+﻿<Properties StartupConfiguration="{2796976C-9784-430C-A877-25A42452CAEC}|https">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="TransactionCodeApi/Controllers/TransactionCodeController.cs">
+    <Files>
+      <File FileName="TransactionCodeApi/Models/TransactionCodeRequest.cs" Line="9" Column="1" />
+      <File FileName="TransactionCodeApi/Models/TransactionCodeResponse.cs" Line="8" Column="6" />
+      <File FileName="TransactionCodeApi/Controllers/TransactionCodeController.cs" Line="16" Column="1" />
+      <File FileName="TransactionCodeApi/Program.cs" Line="25" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="TransactionCodeApi" expanded="True">
+            <Node name="TransactionCodeApi" expanded="True">
+              <Node name="Controllers" expanded="True">
+                <Node name="TransactionCodeController.cs" selected="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.TransactionCodeApi PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
