@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../buildMultiTargeting/TransactionCodeApi.props" />
-</Project>
