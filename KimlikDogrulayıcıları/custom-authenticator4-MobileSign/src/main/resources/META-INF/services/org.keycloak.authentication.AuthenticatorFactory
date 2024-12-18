@@ -1,0 +1,3 @@
+com.example.keycloak.authenticator.MobilsignIdentityProviderFactory
+com.example.keycloak.authenticator.ConsentFormAuthenticatorFactory
+com.example.keycloak.authenticator.WaitingFormAuthenticatorFactory

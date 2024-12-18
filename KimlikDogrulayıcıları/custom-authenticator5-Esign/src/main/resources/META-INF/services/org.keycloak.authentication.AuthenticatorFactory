@@ -1,0 +1,2 @@
+com.example.keycloak.authenticator.EsignIdentityAuthenticatorFactory
+com.example.keycloak.authenticator.EsignNumberAuthenticatorFactory
