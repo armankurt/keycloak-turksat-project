@@ -231,15 +231,30 @@ Oluşturduğunuz klasör yapısı şu şekilde görünmelidir:
 ### FTL Dosyalarının Yüklenmesi
 
 ```bash
-docker cp /Users/armanyilmazkurt/Desktop/keycloak_FTL-dosyalari/login.ftl keycloak:/opt/keycloak/themes/my-new-theme/login/
+docker cp /Users/armanyilmazkurt/Desktop/keycloak_FTL-dosyalari/consent-form.ftl keycloak:/opt/keycloak/themes/my-new-theme/login/
+docker cp /Users/armanyilmazkurt/Desktop/keycloak_FTL-dosyalari/login-config-totp.ftl keycloak:/opt/keycloak/themes/my-new-theme/login/
+docker cp /Users/armanyilmazkurt/Desktop/keycloak_FTL-dosyalari/login-email-otp.ftl keycloak:/opt/keycloak/themes/my-new-theme/login/
+docker cp /Users/armanyilmazkurt/Desktop/keycloak_FTL-dosyalari/login-esign-number.ftl keycloak:/opt/keycloak/themes/my-new-theme/login/
+docker cp /Users/armanyilmazkurt/Desktop/keycloak_FTL-dosyalari/login-esign.ftl keycloak:/opt/keycloak/themes/my-new-theme/login/
+docker cp /Users/armanyilmazkurt/Desktop/keycloak_FTL-dosyalari/login-method-selection.ftl keycloak:/opt/keycloak/themes/my-new-theme/login/
+docker cp /Users/armanyilmazkurt/Desktop/keycloak_FTL-dosyalari/login-otp.ftl keycloak:/opt/keycloak/themes/my-new-theme/login/
 docker cp /Users/armanyilmazkurt/Desktop/keycloak_FTL-dosyalari/login-reset-password.ftl keycloak:/opt/keycloak/themes/my-new-theme/login/
+docker cp /Users/armanyilmazkurt/Desktop/keycloak_FTL-dosyalari/login-sms.ftl keycloak:/opt/keycloak/themes/my-new-theme/login/
+docker cp /Users/armanyilmazkurt/Desktop/keycloak_FTL-dosyalari/login-tc.ftl keycloak:/opt/keycloak/themes/my-new-theme/login/
+docker cp /Users/armanyilmazkurt/Desktop/keycloak_FTL-dosyalari/login.ftl keycloak:/opt/keycloak/themes/my-new-theme/login/
+docker cp /Users/armanyilmazkurt/Desktop/keycloak_FTL-dosyalari/mobilsign-authentication.ftl keycloak:/opt/keycloak/themes/my-new-theme/login/
+docker cp /Users/armanyilmazkurt/Desktop/keycloak_FTL-dosyalari/select-authenticator.ftl keycloak:/opt/keycloak/themes/my-new-theme/login/
+docker cp /Users/armanyilmazkurt/Desktop/keycloak_FTL-dosyalari/waiting-form.ftl keycloak:/opt/keycloak/themes/my-new-theme/login/
 ```
 
 ### Resim Dosyalarının Yüklenmesi
 
 ```bash
-docker cp /Users/armanyilmazkurt/Desktop/keycloak_Resimleri/img.png keycloak:/opt/keycloak/themes/my-new-theme/login/resources/img/
-docker cp /Users/armanyilmazkurt/Desktop/keycloak_Resimleri/tt.png keycloak:/opt/keycloak/themes/my-new-theme/login/resources/img/
+docker cp /Users/armanyilmazkurt/Desktop/keycloak_Resimleri/img.png /opt/keycloak/themes/my-new-theme/login/resources/img
+docker cp /Users/armanyilmazkurt/Desktop/keycloak_Resimleri/tt.png /opt/keycloak/themes/my-new-theme/login/resources/img
+docker cp /Users/armanyilmazkurt/Desktop/keycloak_Resimleri/turkcell.png /opt/keycloak/themes/my-new-theme/login/resources/img
+docker cp /Users/armanyilmazkurt/Desktop/keycloak_Resimleri/vodafone.png /opt/keycloak/themes/my-new-theme/login/resources/img
+docker cp /Users/armanyilmazkurt/Desktop/keycloak_Resimleri/wait.png /opt/keycloak/themes/my-new-theme/login/resources/img
 ```
 
 ---
