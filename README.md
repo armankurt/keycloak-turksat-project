@@ -303,7 +303,7 @@ Konteynırın loglarını izlemek ve olası hataları tespit etmek için şu kom
 docker logs -f keycloak
 ```
 ---
-## 7. Keycloak E-İmza ve Mobil İmza Simülasyonu Çalıştırma Talimatları
+# 7. Keycloak E-İmza ve Mobil İmza Simülasyonu Çalıştırma Talimatları
 
 Bu bölüm, e-İmza ve mobil imza simülasyonlarının nasıl çalıştırılacağını detaylı bir şekilde açıklamaktadır. Aşağıdaki adımları takip ederek her iki simülasyonu test edebilir ve doğrulama süreçlerini uygulayabilirsiniz.
 
@@ -405,7 +405,7 @@ curl -X POST http://127.0.0.1:8081/mobil-sign/approve \
 
 ---
 
-## 8. LDAP Entegrasyonu
+# 8. LDAP Entegrasyonu
 
 LDAP (Lightweight Directory Access Protocol), kullanıcı kimlik bilgilerini merkezi bir dizin hizmetinde saklamak ve yönetmek için kullanılan bir protokoldür. Keycloak ile LDAP entegrasyonu sayesinde kullanıcılar, merkezi bir dizin üzerinde tanımlanan kimlik bilgileriyle giriş yapabilir. Bu entegrasyon hem kullanıcı yönetimini kolaylaştırır hem de güvenliği artırır.
 
@@ -461,13 +461,13 @@ ldapadd -x -D "cn=admin,dc=example,dc=org" -w admin123 -f users.ldif
 2. **Mapper** sekmesine giderek LDAP kullanıcı niteliklerini Keycloak niteliklerine eşleştirin (LDAP **cn**'ini Keycloak **username**'ine eşleme gibi).
 
 ---
-# Keycloak Client Ayarları ve Yapılandırma
+# 9. Keycloak Client Ayarları ve Yapılandırma
 
 Bu adımda, Keycloak üzerinde yeni bir client oluşturup yapılandırmayı göstereceğiz. Kullanılacak client ID örnek olarak `example` seçilmiştir. Bu client, uygulamanızın Keycloak ile entegrasyonunu sağlayacaktır. Lütfen adımları sırayla takip edin.
 
 ---
 
-## 9. Client Oluşturma
+## Client Oluşturma
 
 1. **Keycloak Admin Konsolu’na giriş yapın.**
 2. Sol menüdéki **Clients** sekmesine tıklayın.
@@ -545,7 +545,7 @@ http://localhost:8080/realms/[realm-adı]/protocol/openid-connect/token
 
 ---
 
-## 10. Keycloak Admin Konsolu Ayarları
+# 10. Keycloak Admin Konsolu Ayarları
 
 Keycloak Admin Konsolu üzerinde, **Realm Settings** sekmesinde yapılması gereken ayarlar aşağıda detaylı bir şekilde açıklanmıştır. Bu ayarlarla Keycloak üzerinde kullanıcı profili, olay yönetimi, temalar ve e-posta servisleri yapılandırılacaktır.
 
