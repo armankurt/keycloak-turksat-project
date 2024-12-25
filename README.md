@@ -463,6 +463,84 @@ ldapadd -x -D "cn=admin,dc=example,dc=org" -w admin123 -f users.ldif
 
 ---
 
+## 9. Keycloak Admin Konsolu Ayarları
+
+Keycloak Admin Konsolu üzerinde, **Realm Settings** sekmesinde yapılması gereken ayarlar aşağıda detaylı bir şekilde açıklanmıştır. Bu ayarlarla Keycloak üzerinde kullanıcı profili, olay yönetimi, temalar ve e-posta servisleri yapılandırılacaktır.
+
+---
+
+## 1. Kullanıcı Profili Ayarları
+
+Keycloak'da kullanıcı profilinde şu attributelar yer almalıdır:
+
+- **username**: `${username}`
+- **email**: `${email}`
+- **firstName**: `${firstName}`
+- **lastName**: `${lastName}`
+- **tcNumber**: `${tcNumber}`
+- **mobile_number**: `mobile_number`
+
+### Ayarları Yapılandırmak İçin:
+
+1. Keycloak Admin Konsolu’na giriş yapın.
+2. Sol menüden **User Profile** sekmesine gidin.
+3. Yukarıdaki attributelari sırasıyla oluşturun.
+4. Her biri için uygun değerleri girin.
+
+---
+
+## 2. Event Listener Ayarları
+
+Keycloak üzerinde olaylar (örneğin login ve email) aşağıdaki şekilde yapılandırılacaktır:
+
+- **Event Listeners**:
+  - `login-listener`
+  - `jboss-logging`
+  - `email`
+
+### Ayarları Yapılandırmak İçin:
+
+1. **Realm Settings > Events** sekmesine gidin.
+2. **Event Listeners** alanında yukarıdaki değerleri ekleyin.
+3. Değişiklikleri kaydetmek için **Save** butonuna tıklayın.
+
+---
+
+## 3. Tema Ayarları
+
+Keycloak üzerinde temalar şu şekilde yapılandırılmalıdır:
+
+- **Login Theme**: `my-new-theme`
+- **Email Theme**: `my-custom-theme`
+
+### Ayarları Yapılandırmak İçin:
+
+1. **Realm Settings > Themes** sekmesine gidin.
+2. **Login Theme** alanında `my-new-theme` seçin.
+3. **Email Theme** alanında `my-custom-theme` seçin.
+4. Değişiklikleri kaydetmek için **Save** butonuna tıklayın.
+
+---
+
+## 4. E-posta Gönderim Servisi
+
+E-posta gönderimi için aşağıdaki ayarlar kullanılmalıdır:
+
+- **From**: `example@email.com`
+- **From Display Name**: `Keycloak`
+- **Host**: `smtp.gmail.com`
+- **Port**: `465`
+- **Encryption**: `Enable SSL`
+- **Authentication**: `Enabled`
+
+### Ayarları Yapılandırmak İçin:
+
+1. **Realm Settings > Email** sekmesine gidin.
+2. Yukarıdaki değerleri girin ve değişiklikleri kaydedin.
+3. **Test connection** butonuna tıklayarak bağlantıyı test edin.
+
+---
+
 ## Önemli Not
 
 Bu belgedeki komutlarda yer alan dosya yolları (`/Users/armanyilmazkurt/Desktop/...`) örnek olarak verilmiştir. Kendi sisteminizde bu yolları dosyalarınızın bulunduğu dizinlere göre düzenlemeyi unutmayınız. Özellikle farklı işletim sistemleri kullanıyorsanız (Windows gibi), dosya yollarını buna uygun biçimde değiştirmelisiniz.
