@@ -460,10 +460,92 @@ ldapadd -x -D "cn=admin,dc=example,dc=org" -w admin123 -f users.ldif
 1. **Sync Settings** bölümünden LDAP kullanıcılarını Keycloak'a senkronize edin.
 2. **Mapper** sekmesine giderek LDAP kullanıcı niteliklerini Keycloak niteliklerine eşleştirin (LDAP **cn**'ini Keycloak **username**'ine eşleme gibi).
 
+---
+# Keycloak Client Ayarları ve Yapılandırma
+
+Bu adımda, Keycloak üzerinde yeni bir client oluşturup yapılandırmayı göstereceğiz. Kullanılacak client ID örnek olarak `example` seçilmiştir. Bu client, uygulamanızın Keycloak ile entegrasyonunu sağlayacaktır. Lütfen adımları sırayla takip edin.
 
 ---
 
-## 9. Keycloak Admin Konsolu Ayarları
+## 9. Client Oluşturma
+
+1. **Keycloak Admin Konsolu’na giriş yapın.**
+2. Sol menüdéki **Clients** sekmesine tıklayın.
+3. Açılan ekranda **Create Client** butonuna basın.
+4. Client ayarları için aşağıdaki bilgileri girin:
+   - **Client ID**: `example`
+   - **Client Protocol**: `openid-connect`
+   - **Root URL**: `http://localhost:8080` (Uygulamanızın ana URL’si)
+5. **Save** butonuna basarak client oluşturma işlemini tamamlayın.
+
+---
+
+## Client Ayarlarını Yapılandırma
+
+Oluşturduğunuz client’ı yapılandırmak için şu adımları izleyin:
+
+### Genel Ayarlar (General Settings)
+
+- **Client ID**: `example`
+- **Enabled**: Açık bırakın.
+- **Always Display in Console**: Kapalı tutabilirsiniz (isteğe bağlı).
+
+### Erişim Ayarları (Access Settings)
+
+- **Root URL**: `http://localhost:8080`
+- **Home URL**: `http://localhost:8080/home` (isteğe bağlı olarak belirtebilirsiniz).
+- **Web Origins**: `http://localhost:8080/*`
+- **Redirect URIs**:
+
+```bash
+http://localhost:8080/*
+```
+
+### Yetenek Yapılandırması (Capability Config)
+
+- **Client Authentication**: Açık (**ON**).
+- **Authorization Enabled**: Açık (**ON**).
+- **Authentication Flow**:
+  - `Standard Flow` ve `Direct Access Grants` seçeneklerini işaretleyin.
+
+### Giriş Ayarları (Login Settings)
+
+- **Login Theme**: Daha önce tanımladığınız bir temayı seçebilirsiniz (mesela, `my-new-theme`).
+
+### Çıkış Ayarları (Logout Settings)
+
+- **Front Channel Logout**: Açık (**ON**).
+- **Front Channel Logout URL**:
+
+```bash
+http://localhost:8080/logout
+```
+
+---
+
+## Client Bilgilerini Kullanma
+
+Yapılandırmayı tamamladıktan sonra, uygulamanızın aşağıdaki endpoint'leri kullanarak Keycloak ile entegrasyon kurduğundan emin olun:
+
+### Authorization Endpoint:
+
+```bash
+http://localhost:8080/realms/[realm-adı]/protocol/openid-connect/auth
+```
+
+### Token Endpoint:
+
+```bash
+http://localhost:8080/realms/[realm-adı]/protocol/openid-connect/token
+```
+
+- **Client ID**: `example`
+- **Client Secret**: Bu bilgiyi oluşturduğunuz client'ın **Credentials** sekmesinde bulabilirsiniz.
+
+
+---
+
+## 10. Keycloak Admin Konsolu Ayarları
 
 Keycloak Admin Konsolu üzerinde, **Realm Settings** sekmesinde yapılması gereken ayarlar aşağıda detaylı bir şekilde açıklanmıştır. Bu ayarlarla Keycloak üzerinde kullanıcı profili, olay yönetimi, temalar ve e-posta servisleri yapılandırılacaktır.
 
