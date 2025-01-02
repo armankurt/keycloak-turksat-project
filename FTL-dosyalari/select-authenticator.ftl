@@ -6,16 +6,31 @@
         <p style="font-size: 16px; color: #555; margin-top: 8px;">Lütfen giriş yöntemini seçiniz.</p>
     </div>
 
-    <div class="selection-container">
-        <#list auth.authenticationSelections as authenticationSelection>
-            <form action="${url.loginAction}" method="post" style="width: 100%;">
-                <input type="hidden" name="authenticationExecution" value="${authenticationSelection.authExecId}">
-                <button type="submit" class="auth-button">
-                    ${msg(authenticationSelection.displayName)}
-                </button>
-            </form>
-        </#list>
-    </div>
+<div class="selection-container">
+    <#list auth.authenticationSelections as authenticationSelection>
+        <form action="${url.loginAction}" method="post" style="width: 100%;">
+            <input type="hidden" name="authenticationExecution" value="${authenticationSelection.authExecId}">
+            <button type="submit" class="auth-button">
+                <#switch authenticationSelection.displayName>
+                    <#case "username-and-password-display-name">
+                        ${msg(authenticationSelection.displayName)}
+                        <#break>
+                    <#case "tc-kimlik-authenticator-display-name">
+                        TC Kimlik ile Giriş
+                        <#break>
+                    <#case "mobilsign-display-name">
+                        Mobil İmza ile Giriş
+                        <#break>
+                    <#case "esign-display-name">
+                        E-İmza ile Giriş
+                        <#break>
+                    <#default>
+                        ${msg(authenticationSelection.displayName)}
+                </#switch>
+            </button>
+        </form>
+    </#list>
+</div>
 
 <style>
     /* Genel Stil */
