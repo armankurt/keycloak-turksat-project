@@ -94,46 +94,106 @@
         }
 
         /* Popup Stil */
-        .popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Daha koyu bir overlay */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Öncelikli görünüme sahip olması için */
+}
 
-        .popup-content {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            width: 300px;
-        }
+.popup-content {
+    background: linear-gradient(135deg, #ffffff, #f7f9fc); /* Hafif bir degrade */
+    padding: 30px;
+    border-radius: 16px; /* Daha modern bir görünüm için */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Daha belirgin gölge */
+    text-align: center;
+    width: 360px;
+    animation: fadeIn 0.3s ease-out; /* Hafif bir animasyon */
+    position: relative; /* Kapama düğmesi için */
+}
 
-        .popup-content h2 {
-            margin: 0 0 15px;
-            font-size: 18px;
-            color: #2c3e50;
-        }
+.popup-content h2 {
+    margin: 0 0 15px;
+    font-size: 22px;
+    color: #34495e; /* Daha koyu bir başlık rengi */
+    font-weight: 600;
+}
 
-        .popup input {
-            width: 90%;
-            padding: 8px;
-            margin: 10px 0;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+.popup-content p {
+    margin: 0 0 20px;
+    font-size: 16px;
+    color: #7f8c8d; /* Hafif gri metin rengi */
+    line-height: 1.5;
+}
 
-        .popup button {
-            width: auto;
-            background-color: #27ae60;
-        }
+.popup input {
+    width: 100%;
+    padding: 12px;
+    margin: 15px 0;
+    font-size: 16px;
+    border: 1px solid #dfe6e9;
+    border-radius: 8px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.popup input:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+}
+
+.popup button {
+    width: 100%;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 12px 0;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.popup button:hover {
+    background-color: #2980b9;
+}
+
+.popup .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    color: #7f8c8d;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.popup .close-btn:hover {
+    color: #e74c3c;
+}
+
+/* Animasyonlar */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
     </style>
 </head>
 <body>
@@ -165,76 +225,95 @@
         <p id="message"></p>
     </div>
 
-        <!-- Popup -->
-        <div id="popup" class="popup">
-            <div class="popup-content">
-                <h2>Manuel Doğrulama</h2>
-                <p>Lütfen manuel doğrulama kodunu girin.</p>
-                <input type="text" id="manualCodeInput" placeholder="123456">
-                <button id="submitManualCode">Doğrula</button>
-            </div>
-        </div>
+<!-- Popup -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <h2>Manuel Doğrulama</h2>
+        <p>Lütfen 4 haneli PIN kodunu girin.</p>
+        <input type="text" id="manualCodeInput">
+        <button id="submitManualCode">Doğrula</button>
+    </div>
+</div>
+
 
     <!-- JavaScript -->
     <script>
-        const verifyCodeButton = document.getElementById("verifyCode");
-        const userVerifyCodeButton = document.getElementById("userVerifyCode");
-        const transactionCodeInput = document.getElementById("transactionCode");
-        const cardTypeSelect = document.getElementById("cardType");
-        const message = document.getElementById("message");
+        // HTML elementlerini seç
+const userVerifyCodeButton = document.getElementById("userVerifyCode");
+const transactionCodeInput = document.getElementById("transactionCode");
+const manualCodeInput = document.getElementById("manualCodeInput");
+const submitManualCodeButton = document.getElementById("submitManualCode");
+const popup = document.getElementById("popup");
+const message = document.getElementById("message");
 
-        const API_BASE_URL = "http://127.0.0.1:7248/api";
+const API_BASE_URL = "http://127.0.0.1:7248/api";
 
-        // Doğrulama İşlemi
-        async function handleRequest(button, endpoint) {
-            const transactionCode = transactionCodeInput.value.trim();
-            const cardType = cardTypeSelect.value;
+// Doğrulama Yap butonuna basıldığında popup açılır
+userVerifyCodeButton.addEventListener("click", () => {
+    const transactionCode = transactionCodeInput.value.trim();
 
-            if (!transactionCode || !cardType) {
-                displayMessage("Lütfen işlem kodunu ve kart tipini girin.", "error");
-                return;
-            }
+    if (!transactionCode) {
+        displayMessage("Lütfen işlem kodunu girin.", "error");
+        return;
+    }
 
-            button.disabled = true;
-            button.innerHTML = "Lütfen Bekleyin...";
+    // Popup'u aç
+    openPopup();
+});
 
-            try {
-                const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ transactionCode, cardType })
-                });
+// PIN doğrulama işlemi
+submitManualCodeButton.addEventListener("click", async () => {
+    const transactionCode = transactionCodeInput.value.trim();
+    const pin = manualCodeInput.value.trim();
 
-                const result = await response.json();
-                handleResponse(result);
-            } catch (error) {
-                console.error("Hata:", error);
-                displayMessage("Sunucu hatası oluştu. Lütfen tekrar deneyin.", "error");
-            } finally {
-                button.disabled = false;
-                button.innerHTML = endpoint.includes("user") ? "Doğrulama Yap" : "Doğrulamayı Kontrol Et";
-            }
+    if (!pin || pin !== "1234") { // PIN kontrolü
+        displayMessage("Geçersiz PIN! Lütfen 1234 girin.", "error");
+        return;
+    }
+
+    submitManualCodeButton.disabled = true;
+    submitManualCodeButton.innerHTML = "Lütfen Bekleyin...";
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/TransactionCode/verify-pin`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ transactionCode, pin })
+        });
+
+        const result = await response.json();
+
+        if (result.status === "verified") {
+            displayMessage("PIN doğrulandı! Giriş başarılı.", "success");
+            closePopup();
+        } else {
+            displayMessage(result.message, "error");
         }
+    } catch (error) {
+        console.error("Hata:", error);
+        displayMessage("Sunucu hatası oluştu. Lütfen tekrar deneyin.", "error");
+    } finally {
+        submitManualCodeButton.disabled = false;
+        submitManualCodeButton.innerHTML = "Doğrula";
+    }
+});
 
-        // Yanıt Yönetimi
-        function handleResponse(result) {
-            if (result.status === "verified") {
-                displayMessage("Kod doğrulandı! Giriş başarılı. Lütfen keycloak sistemine geri dönün", "success");
-            } else if (result.status === "pending") {
-                displayMessage("Kod doğrulama bekleniyor. Lütfen doğrulamayı tamamlayın.", "pending");
-            } else {
-                displayMessage("Geçersiz kod! Lütfen doğru kodu girin.", "error");
-            }
-        }
+// Mesaj Gösterimi Fonksiyonu
+function displayMessage(text, type) {
+    message.innerText = text;
+    message.className = type;
+}
 
-        function displayMessage(text, type) {
-            message.innerText = text;
-            message.className = type;
-        }
+// Popup Açma Fonksiyonu
+function openPopup() {
+    popup.style.display = "flex";
+}
 
-        // Event Listeners
-        verifyCodeButton.addEventListener("click", () => handleRequest(verifyCodeButton, "/TransactionCode/verify"));
-        userVerifyCodeButton.addEventListener("click", () => handleRequest(userVerifyCodeButton, "/TransactionCode/user-verify"));
+// Popup Kapatma Fonksiyonu
+function closePopup() {
+    popup.style.display = "none";
+}
+
     </script>
 </body>
 </html>

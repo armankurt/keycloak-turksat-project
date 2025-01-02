@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobil Onay</title>
+    <style>
+        /* Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+    
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #2e8bc0, #b1d4e0);
+            color: #333;
+        }
+    
+        /* Container Styles */
+        .container {
+            text-align: center;
+            padding: 40px;
+            border-radius: 16px;
+            background: #ffffff;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 450px;
+        }
+    
+        /* Heading Styles */
+        h1 {
+            font-size: 2rem;
+            color: #2e8bc0;
+            margin-bottom: 25px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+    
+        /* Input Styles */
+        input {
+            padding: 14px;
+            width: 100%;
+            margin-bottom: 25px;
+            border: 1px solid #ccddee;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+    
+        input:focus {
+            border-color: #2e8bc0;
+            outline: none;
+            box-shadow: 0 0 8px rgba(46, 139, 192, 0.5);
+        }
+    
+        /* Button Styles */
+        button {
+            padding: 14px 20px;
+            background-color: #2e8bc0;
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 15px;
+            transition: background-color 0.3s ease;
+        }
+    
+        button:hover {
+            background-color: #1b6691;
+        }
+    
+        .status {
+            margin-top: 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            color: #6c757d; /* Daha zarif bir metin rengi */
+            background-color: #fefefe; /* Hafif bir arka plan rengi */
+            border: 1px solid #dee2e6; /* Yumuşak bir kenar çizgisi */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hafif bir gölge efekti */
+        }
+
+        /* Bekleme durumuna özel */
+        .status.pending {
+            color: #856404;
+            background-color: #fffbea;
+            border: 1px solid #ffd966;
+        }
+
+        /* Onaylanma durumuna özel */
+        .status.approved {
+            color: #155724;
+            background-color: #d4f8e8;
+            border: 1px solid #c3e6cb;
+        }
+
+        /* Hata durumuna özel */
+        .status.error {
+            color: #721c24;
+            background-color: #fdecea;
+            border: 1px solid #f5c6cb;
+        }
+
+    
+        /* Responsive Styles */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.7rem;
+            }
+    
+            button {
+                font-size: 0.95rem;
+            }
+    
+            input {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Mobil Onay</h1>
+        <input type="password" id="password" placeholder="Şifre" />
+        <button onclick="sendApproval()">Onayla</button>
+        <button onclick="checkStatus()">Durumu Kontrol Et</button>
+        <div class="status pending" id="status">Durum: Bekliyor</div>
+    </div>
+
+    <script>
+        const API_URL = "http://localhost:8081";
+
+        async function sendApproval() {
+            const password = document.getElementById("password").value;
+
+            try {
+                const response = await fetch(`${API_URL}/mobil-sign/approve`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ password }),
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    document.getElementById("status").textContent = `Durum: ${errorData.message}`;
+                    document.getElementById("status").className = "status error";
+                    return;
+                }
+
+                const data = await response.json();
+                document.getElementById("status").textContent = "Durum: Kullanıcı onaylandı";
+                document.getElementById("status").className = "status approved";
+            } catch (error) {
+                console.error("Hata:", error);
+                document.getElementById("status").textContent = "Durum: Sunucu hatası";
+                document.getElementById("status").className = "status error";
+            }
+        }
+
+        async function checkStatus() {
+            try {
+                const response = await fetch(`${API_URL}/mobil-sign/approval`);
+
+                if (!response.ok) {
+                    document.getElementById("status").textContent = "Durum: Hata oluştu";
+                    document.getElementById("status").className = "status error";
+                    return;
+                }
+
+                const data = await response.json();
+                document.getElementById("status").textContent = `Durum: ${data.status === "approved" ? "Onaylandı" : "Bekliyor"}`;
+                document.getElementById("status").className = `status ${data.status === "approved" ? "approved" : "pending"}`;
+            } catch (error) {
+                console.error("Hata:", error);
+                document.getElementById("status").textContent = "Durum: Sunucu hatası";
+                document.getElementById("status").className = "status error";
+            }
+        }
+    </script>
+</body>
+</html>
