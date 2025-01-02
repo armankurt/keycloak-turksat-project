@@ -676,7 +676,7 @@ E-posta gönderimi için aşağıdaki ayarlar kullanılmalıdır:
 3. **Test connection** butonuna tıklayarak bağlantıyı test edin.
 
 ---
-# Keycloak E-posta Şablonlarının Özelleştirilmesi
+## 11. Keycloak E-posta Şablonlarının Özelleştirilmesi
 
 Keycloak üzerinden gönderilen sistem e-postaları için e-posta şablonları özelleştirilebilir. Özelleştirilmiş e-posta şablonlarını kullanarak kullanıcı dostu ve profesyonel bir görünüm sağlayabilirsiniz.
 
