@@ -222,14 +222,6 @@ login-esign-number.ftl	mobilsign-authentication.ftl
 login.ftl
 ```
 
-Bu dosyaları Keycloak sunucusunun uygun bir yerinden ya da kendi hazırladığınız dizinden taşıyabilirsiniz. Örnek bir kopyalama işlemi:
-
-```bash
-cp /path/to/your/ftl/files/*.ftl /opt/keycloak/themes/my-new-theme/login/
-cp /path/to/your/theme.properties /opt/keycloak/themes/my-new-theme/login/
-cp /path/to/your/totp-style.css /opt/keycloak/themes/my-new-theme/login/
-```
-
 ### CSS Dosyasını Resources/CSS Klasörüne Ekleyin:
 
 `/opt/keycloak/themes/my-new-theme/login/resources/css` klasörü aşağıdaki dosyayı içermelidir:
@@ -241,7 +233,7 @@ login.css
 Örnek bir kopyalama işlemi:
 
 ```bash
-cp /path/to/your/login.css /opt/keycloak/themes/my-new-theme/login/resources/css/
+cp /Users/armanyilmazkurt/Desktop/keycloak_FTL-dosyalari/login.css /opt/keycloak/themes/my-new-theme/login/resources/css/
 ```
 
 ---
