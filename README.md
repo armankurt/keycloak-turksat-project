@@ -8,7 +8,8 @@ Belgede ayrıca Keycloak temasının özelleştirilmesine ilişkin bilgiler de b
 
 Aşağıdaki video, bu proje hakkında bilgi vermektedir:
 
-[![Keycloak Türksat Proje Videosu](https://img.youtube.com/vi/Z00Vl8fRC3M/0.jpg)](https://www.youtube.com/watch?v=Z00Vl8fRC3M)
+<video src="https://github.com/user-attachments/assets/dcbafa9a-6e58-416e-b34e-113b993289f3" controls="controls" style="max-width: 100%; height: auto;">
+</video>
 
 
 ---
