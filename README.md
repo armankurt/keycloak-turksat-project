@@ -2,9 +2,9 @@
 
 Bu proje, keycloakta modern kimlik doğrulama ve yetkilendirme işlemleri için kullanılan, açık kaynaklı bir kimlik sağlayıcıdır. Bu belge, Docker ortamında Keycloak konteynırının kurulumu ve özelleştirilmesi için gereken tüm adımları detaylı bir şekilde açıklamaktadır. Ayrıca, özelleştirilmiş doğrulayıcıların (authenticator) oluşturulması, bu doğrulayıcıların Keycloak üzerine yüklenmesi ve doğru bir şekilde yapılandırılması konularında rehberlik etmektedir.
 
-Bu belge, özellikle kullanıcıların kimlik doğrulama sürecini kişiselleştirmek ve sistem gereksinimlerine uygun hale getirmek isteyen yazılım geliştiriciler için hazırlanmıştır. Örneğin, bir projede kullanıcıların TC Kimlik Numarası ile giriş yapabilmesi, e-posta veya SMS yoluyla iki faktörlü doğrulama gerçekleştirebilmesi ya da mobil imza ve e-imza gibi ileri düzey güvenlik yöntemlerini kullanabilmesi gerekebilir. Burada ele alınan yöntemler, bu gibi ihtiyaçlara yanıt verecek şekilde tasarlanmıştır.
+Bu belge, özellikle kullanıcıların kimlik doğrulama sürecini kişiselleştirmek ve sistem gereksinimlerine uygun hale getirmek isteyen yazılım geliştiriciler için hazırlanmıştır. Örneğin, bir projede kullanıcıların TC Kimlik Numarası, email veya kullanıcı adı ile giriş yapabilmesi, e-posta, uygulama veya SMS yoluyla iki faktörlü doğrulama gerçekleştirebilmesi ya da mobil imza ve e-imza gibi ileri düzey güvenlik yöntemlerini kullanabilmesi gerekebilir. Burada ele alınan yöntemler, bu gibi ihtiyaçlara yanıt verecek şekilde tasarlanmıştır.
 
-Belgede ayrıca Keycloak temasının özelleştirilmesine ilişkin bilgiler de bulunmaktadır. Özel bir giriş sayfası tasarlamak, şirket markasına uygun bir görünüm ve his yaratmak isteyen projeler için özel tema oluşturma ve düzenleme adımları detaylandırılmıştır. Keycloak’ı kullanarak kimlik doğrulama süreçlerinizi hem güvenli hem de kullanıcı dostu bir hale getirmek için ihtiyacınız olan tüm teknik bilgiler bu belgede yer almaktadır.
+Belgede ayrıca Keycloak temasının özelleştirilmesine ilişkin bilgiler de bulunmaktadır. Keycloak’ı kullanarak kimlik doğrulama süreçlerinizi hem güvenli hem de kullanıcı dostu bir hale getirmek için ihtiyacınız olan tüm teknik bilgiler bu belgede yer almaktadır.
 
 Aşağıdaki video, bu proje hakkında bilgi vermektedir:
 
@@ -122,8 +122,6 @@ Yeni oluşturulan akışa doğrulayıcıları eklemek için:
 1. **Add execution** butonuna tıklayarak adımları ekleyin.
 2. Yüklediğiniz doğrulayıcıları (mesela, **TC Kimlik Authenticator**, **Email OTP Authenticator**, **SMS Authenticator**) sırayla seçin ve ekleyin.
 3. Eklediğiniz her adımın **Requirement** ayarını yapılandırın:
-   - **Required**: Adım zorunlu olarak çalışır.
-   - **Alternative**: Kullanıcı alternatif doğrulama yöntemlerinden birini seçebilir.
 
 ### Örnek Yapılandırma
 
@@ -452,12 +450,6 @@ curl -X GET http://127.0.0.1:8081/mobil-sign/approval
 - `"message": "User approved"`: Kullanıcı başarıyla onaylandı.
 - `"message": "Invalid password"`: Geçersiz şifre.
 
-**curl ile örnek:**
-
-```bash
-curl -X POST http://127.0.0.1:8081/mobil-sign/approve \
--H "Content-Type: application/json" \
--d '{"password": "1234"}'
 ```
 
 ### 4. Kullanıcı İşlemleri
@@ -525,7 +517,7 @@ ldapadd -x -D "cn=admin,dc=example,dc=org" -w admin123 -f users.ldif
 ---
 ## 9. Keycloak Client Ayarları ve Yapılandırma
 
-Bu adımda, Keycloak üzerinde yeni bir client oluşturup yapılandırmayı göstereceğiz. Kullanılacak client ID örnek olarak `example` seçilmiştir. Bu client, uygulamanızın Keycloak ile entegrasyonunu sağlayacaktır. Lütfen adımları sırayla takip edin.
+Bu adımda, Keycloak üzerinde yeni bir client oluşturup yapılandırmayı göstereceğim. Kullanılacak client ID örnek olarak `example` seçilmiştir. Bu client, uygulamanızın Keycloak ile entegrasyonunu sağlayacaktır. Lütfen adımları sırayla takip edin.
 
 ---
 
