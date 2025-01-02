@@ -187,44 +187,107 @@ Bu komut, Keycloak konteynırının terminaline bağlanmanızı sağlar. Buradan
 
 ---
 
-## 3. Özel Tema Klasörünün Oluşturulması
+## 3. Özel Tema Klasörünün Oluşturulması ve Yapılandırılması
 
-Keycloak temaları, `/opt/keycloak/themes/` dizini altında yer alır. Buraya yeni bir tema klasörü oluşturmanız gerekmektedir.
+Keycloak temaları, `/opt/keycloak/themes/` dizini altında yer alır. Buraya yeni bir tema klasörü oluşturarak gerekli dosyaları yerleştirebilirsiniz.
 
-### Tema Yapısını Oluşturma
+---
 
-1. **Temalar** dizinine gidin:
-   ```bash
-   cd /opt/keycloak/themes/
-   ```
+## Tema Yapısını Oluşturma
 
-2. **Yeni tema klasörünü oluşturun:**
-   ```bash
-   mkdir my-new-theme
-   ```
+### Temalar Dizinine Gidin:
 
-3. **Tema alt klasörlerini oluşturun:** Tema için gerekli klasör yapısını aşağıdaki komutlarla oluşturabilirsiniz:
-   ```bash
-   mkdir -p my-new-theme/login/resources/img
-   mkdir -p my-new-theme/common
-   ```
+```bash
+cd /opt/keycloak/themes/
+```
 
-### Tema Klasörü Yapısı
+### Yeni Tema Klasörünü Oluşturun:
+
+```bash
+mkdir -p my-new-theme/login/resources/css
+```
+
+### Gerekli Dosyaları Login Klasörüné Ekleyin:
+
+`/opt/keycloak/themes/my-new-theme/login` klasörü şu dosyaları içermelidir:
+
+```plaintext
+consent-form.ftl		login-method-selection.ftl    resources
+login-otp.ftl		select-authenticator.ftl
+login-reset-password.ftl	select-provider.ftl
+login-config-totp.ftl		login-sms.ftl		  theme.properties
+login-email-otp.ftl		login-tc.ftl		  totp-style.css
+login-esign.ftl		login-update-password.ftl     waiting-form.ftl
+login-esign-number.ftl	mobilsign-authentication.ftl
+login.ftl
+```
+
+Bu dosyaları Keycloak sunucusunun uygun bir yerinden ya da kendi hazırladığınız dizinden taşıyabilirsiniz. Örnek bir kopyalama işlemi:
+
+```bash
+cp /path/to/your/ftl/files/*.ftl /opt/keycloak/themes/my-new-theme/login/
+cp /path/to/your/theme.properties /opt/keycloak/themes/my-new-theme/login/
+cp /path/to/your/totp-style.css /opt/keycloak/themes/my-new-theme/login/
+```
+
+### CSS Dosyasını Resources/CSS Klasörüne Ekleyin:
+
+`/opt/keycloak/themes/my-new-theme/login/resources/css` klasörü aşağıdaki dosyayı içermelidir:
+
+```plaintext
+login.css
+```
+
+Örnek bir kopyalama işlemi:
+
+```bash
+cp /path/to/your/login.css /opt/keycloak/themes/my-new-theme/login/resources/css/
+```
+
+---
+
+## Tema Klasörünün Son Yapısı
 
 Oluşturduğunuz klasör yapısı şu şekilde görünmelidir:
 
-```
+```plaintext
 /opt/keycloak/themes/my-new-theme
 │
 ├── login
+│   ├── consent-form.ftl
+│   ├── login-method-selection.ftl
+│   ├── login-otp.ftl
+│   ├── login-reset-password.ftl
+│   ├── login-config-totp.ftl
+│   ├── login-email-otp.ftl
+│   ├── login-esign.ftl
+│   ├── login-esign-number.ftl
+│   ├── login.ftl
+│   ├── login-sms.ftl
+│   ├── login-tc.ftl
+│   ├── login-update-password.ftl
+│   ├── mobilsign-authentication.ftl
+│   ├── select-authenticator.ftl
+│   ├── select-provider.ftl
+│   ├── theme.properties
+│   ├── totp-style.css
+│   └── waiting-form.ftl
 │   ├── resources
-│       └── img
-├── common
+│       └── css
+│           └── login.css
 ```
 
-- **login**: Giriş sayfası için FTL dosyalarını içerecek klasör.
-- **resources/img**: Temada kullanılacak resimler için klasör.
-- **common**: Tema için ortak CSS ve JS dosyalarının yükleneceği klasör.
+---
+
+## Temayı Aktif Hale Getirme
+
+Yeni temayı aktif hale getirmek için Keycloak Admin Konsolu'nda aşağıdaki adımları izleyin:
+
+1. **Keycloak Admin Konsolu'na gidin** ([http://localhost:8080](http://localhost:8080)).
+2. **Realm Settings** sekmesine tıklayın.
+3. **Themes** sekmesinde, **Login Theme** alanından `my-new-theme` seçimini yapın.
+4. **Save** butonuna tıklayarak değişiklikleri kaydedin.
+
 
 ---
 
@@ -249,6 +312,7 @@ docker cp /Users/armanyilmazkurt/Desktop/keycloak_FTL-dosyalari/login.ftl keyclo
 docker cp /Users/armanyilmazkurt/Desktop/keycloak_FTL-dosyalari/mobilsign-authentication.ftl keycloak:/opt/keycloak/themes/my-new-theme/login/
 docker cp /Users/armanyilmazkurt/Desktop/keycloak_FTL-dosyalari/select-authenticator.ftl keycloak:/opt/keycloak/themes/my-new-theme/login/
 docker cp /Users/armanyilmazkurt/Desktop/keycloak_FTL-dosyalari/waiting-form.ftl keycloak:/opt/keycloak/themes/my-new-theme/login/
+docker cp /Users/armanyilmazkurt/Desktop/keycloak_FTL-dosyalari/theme.properties keycloak:/opt/keycloak/themes/my-new-theme/login/
 ```
 
 ### Resim Dosyalarının Yüklenmesi
