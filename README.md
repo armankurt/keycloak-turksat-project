@@ -676,6 +676,185 @@ E-posta gönderimi için aşağıdaki ayarlar kullanılmalıdır:
 3. **Test connection** butonuna tıklayarak bağlantıyı test edin.
 
 ---
+# Keycloak E-posta Şablonlarının Özelleştirilmesi
+
+Keycloak üzerinden gönderilen sistem e-postaları için e-posta şablonları özelleştirilebilir. Özelleştirilmiş e-posta şablonlarını kullanarak kullanıcı dostu ve profesyonel bir görünüm sağlayabilirsiniz.
+
+---
+
+## 11.1 Özelleştirilmiş E-posta Şablonlarının Dizini
+
+E-posta şablonları, aşağıdaki dizin yapısında bulunmalıdır:
+
+- **HTML Şablonları**: `/opt/keycloak/themes/my-custom-theme/email/html`
+- **Text Şablonları**: `/opt/keycloak/themes/my-custom-theme/email/text`
+
+---
+
+## 11.2 Kullanılabilir Şablonlar
+
+Her bir şablon, Keycloak tarafından belirli bir olay sırasında kullanılır.
+
+### HTML Şablonları
+
+#### 1. Login Notification (Giriş Bildirimi)
+
+```html
+<html>
+  <body>
+    <h1>Giriş Bildirimi</h1>
+    <p>Sayın ${user.firstName},</p>
+    <p>Hesabınıza başarıyla giriş yaptınız.</p>
+    <p>Eğer bu işlemi siz yapmadıysanız, lütfen hemen şifrenizi sıfırlayın.</p>
+    <p>Saygılarımızla,<br/>${realmName} Ekibi</p>
+  </body>
+</html>
+```
+
+#### 2. Logout Notification (Çıkış Bildirimi)
+
+```html
+<html>
+  <body>
+    <h1>Çıkış Bildirimi</h1>
+    <p>Sayın ${user.firstName},</p>
+    <p>Hesabınızdan başarıyla çıkış yaptınız.</p>
+    <p>Saygılarımızla,<br/>${realmName} Ekibi</p>
+  </body>
+</html>
+```
+
+#### 3. Login Error Notification (Giriş Hatası Bildirimi)
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  <div class="email-container">
+    <div class="email-header">Giriş Başarısız Oldu</div>
+    <div class="email-body">
+      <p>Merhaba ${user.firstName},</p>
+      <p>Sistemimize yaptığınız giriş başarısız oldu. Lütfen şifrenizi kontrol edin ve tekrar deneyin.</p>
+    </div>
+    <div class="email-footer">
+      Saygılarımızla,<br/>
+      ${realmName} Ekibi
+    </div>
+  </div>
+</body>
+</html>
+```
+
+#### 4. Forgot Password (Şifre Sıfırlama)
+
+```html
+<html>
+  <body>
+    <h1>Şifrenizi Sıfırlayın</h1>
+    <p>Sayın ${user.firstName},</p>
+    <p>Hesabınızın şifresini sıfırlamak için bir istekte bulundunuz.</p>
+    <p>Şifrenizi sıfırlamak için aşağıdaki bağlantıya tıklayın:</p>
+    <p><a href="${link}">Şifreyi Sıfırla</a></p>
+    <p>Eğer bu istekte bulunmadıysanız, bu e-postayı yok sayabilirsiniz.</p>
+    <p>Saygılarımızla,<br/>${realmName} Ekibi</p>
+  </body>
+</html>
+```
+
+#### 5. Email Verification (E-posta Doğrulama)
+
+```html
+<html>
+  <body>
+    <h1>E-posta Doğrulama</h1>
+    <p>Sayın ${user.firstName},</p>
+    <p>E-posta adresinizi doğrulamak için lütfen aşağıdaki bağlantıya tıklayın:</p>
+    <p><a href="${link}">E-postayı Doğrula</a></p>
+    <p>Eğer bu istekte bulunmadıysanız, bu e-postayı yok sayabilirsiniz.</p>
+    <p>Saygılarımızla,<br/>${realmName} Ekibi</p>
+  </body>
+</html>
+```
+
+### Text Şablonları
+
+#### 1. Login Notification (Giriş Bildirimi)
+
+```plaintext
+Konu: Giriş Bildirimi
+
+Sayın ${user.firstName},
+
+Hesabınıza başarıyla giriş yaptınız.
+
+Eğer bu işlemi siz yapmadıysanız, lütfen hemen şifrenizi sıfırlayın.
+
+Saygılarımızla,
+${realmName} Ekibi
+```
+
+#### 2. Logout Notification (Çıkış Bildirimi)
+
+```plaintext
+Konu: Çıkış Bildirimi
+
+Sayın ${user.firstName},
+
+Hesabınızdan başarıyla çıkış yaptınız.
+
+Saygılarımızla,
+${realmName} Ekibi
+```
+
+#### 3. Login Error Notification (Giriş Hatası Bildirimi)
+
+```plaintext
+Merhaba ${user.firstName},
+
+Sistemimize yaptığınız giriş başarısız oldu. Lütfen şifrenizi kontrol edin ve tekrar deneyin.
+
+Saygılarımızla,
+${realmName} Ekibi
+```
+
+#### 4. Forgot Password (Şifre Sıfırlama)
+
+```plaintext
+Konu: Şifrenizi Sıfırlayın
+
+Sayın ${user.firstName},
+
+Hesabınızın şifresini sıfırlamak için bir istekte bulundunuz.
+
+Şifrenizi sıfırlamak için aşağıdaki bağlantıya tıklayın:
+${link}
+
+Eğer bu istekte bulunmadıysanız, bu e-postayı yok sayabilirsiniz.
+
+Saygılarımızla,
+${realmName} Ekibi
+```
+
+#### 5. Email Verification (E-posta Doğrulama)
+
+```plaintext
+Konu: E-posta Doğrulama
+
+Sayın ${user.firstName},
+
+E-posta adresinizi doğrulamak için lütfen aşağıdaki bağlantıya tıklayın:
+${link}
+
+Eğer bu istekte bulunmadıysanız, bu e-postayı yok sayabilirsiniz.
+
+Saygılarımızla,
+${realmName} Ekibi
+```
+
+
+---
 
 ## Önemli Not
 
