@@ -1,0 +1,1 @@
+<html><body><h1>Logout Notification</h1><p>Dear ${user.firstName},</p><p>You have successfully logged out from your account on ${realmName}.</p><p>Best regards,<br/>${realmName} Team</p></body></html>

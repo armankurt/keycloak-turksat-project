@@ -1,0 +1,1 @@
+<html><body><h1>Login Notification</h1><p>Dear ${user.firstName},</p><p>You have successfully logged in to your account on ${realmName}.</p><p>If this wasn't you, please reset your password immediately.</p><p>Best regards,<br/>${realmName} Team</p></body></html>

@@ -1,0 +1,1 @@
+Subject: Test Email\n\nThis is a test email sent from Keycloak.\n\nBest regards,\nThe Keycloak Team

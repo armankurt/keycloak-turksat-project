@@ -1,0 +1,1 @@
+Subject: Login Notification\n\nDear ${user.firstName},\n\nYou have successfully logged in to your account on ${realmName}.\n\nIf this wasn't you, please reset your password immediately.\n\nBest regards,\n${realmName} Team

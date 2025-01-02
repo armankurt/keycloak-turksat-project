@@ -1,0 +1,1 @@
+Subject: Email Verification\n\nDear ${user.firstName},\n\nPlease verify your email address by clicking on the link below:\n${link}\n\nIf you did not request this, you can ignore this email.\n\nBest regards,\n${realmName} Team
