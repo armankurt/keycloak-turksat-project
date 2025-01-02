@@ -6,6 +6,10 @@ Bu belge, özellikle kullanıcıların kimlik doğrulama sürecini kişiselleşt
 
 Belgede ayrıca Keycloak temasının özelleştirilmesine ilişkin bilgiler de bulunmaktadır. Özel bir giriş sayfası tasarlamak, şirket markasına uygun bir görünüm ve his yaratmak isteyen projeler için özel tema oluşturma ve düzenleme adımları detaylandırılmıştır. Keycloak’ı kullanarak kimlik doğrulama süreçlerinizi hem güvenli hem de kullanıcı dostu bir hale getirmek için ihtiyacınız olan tüm teknik bilgiler bu belgede yer almaktadır.
 
+Aşağıdaki video, bu proje hakkında bilgi vermektedir:
+
+[![Keycloak Türksat Proje Videosu](https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg)](KeycloakTürksatProjeVideosu.mp4)
+
 ---
 
 ## Docker ile Keycloak Kurulumu
