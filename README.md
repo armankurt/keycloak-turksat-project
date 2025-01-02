@@ -852,6 +852,7 @@ Eğer bu istekte bulunmadıysanız, bu e-postayı yok sayabilirsiniz.
 Saygılarımızla,
 ${realmName} Ekibi
 ```
+Email Dosyaları Bu adrese eklenecektir: keycloak:/opt/keycloak/themes/my-custom-theme/email/text ve keycloak:/opt/keycloak/themes/my-custom-theme/email/html
 
 
 ---
